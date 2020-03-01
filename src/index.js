@@ -1,7 +1,8 @@
 const express = require('express');
 const connectDB = require('../config/db');
 const authRoutes = require('./routes/authRoutes');
-const auth = require('./middleware/requireAuth');
+const trackRoutes = require('./routes/trackRoutes');
+const auth = require('./middlewares/requireAuth');
 require('colors');
 
 
@@ -16,6 +17,7 @@ const app = express();
 app.use(express.json({ extended: false}));
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/tracks', trackRoutes);
 
 app.get('/api/v1', auth, (req, res) => {
   res.send(`Your email is: ${req.user.email}`);
